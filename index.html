@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+<input id="url" placeholder="Paste TikTok, Instagram, Facebook, YouTube">
+<select id="type">
+<option value="video">Video</option>
+<option value="mp3">MP3</option>
+</select>
+<button onclick="go()">Download</button>
+<p id="out"></p>
+
+<script>
+function go(){
+fetch("https://YOUR_RENDER_URL.onrender.com/api",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+url:document.getElementById("url").value,
+type:document.getElementById("type").value
+})
+})
+.then(r=>r.json())
+.then(d=>{
+document.getElementById("out").innerHTML =
+`<a href="${d.link}">Download</a>`;
+});
+}
+</script>
+</body>
+</html>
